@@ -1,5 +1,11 @@
 package com.learn.shoeproject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+
 public class AddOrderItemRequest {
 
     private int quantity;
@@ -8,15 +14,37 @@ public class AddOrderItemRequest {
     private int customerId;
     private int shoeId;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date date;
+
     public AddOrderItemRequest() {
     }
 
-    public AddOrderItemRequest(int quantity, int totalPrice, int size, int customerId, int shoeId) {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+//    public AddOrderItemRequest(int quantity, int totalPrice, int size, int customerId, int shoeId) {
+//        this.quantity = quantity;
+//        this.totalPrice = totalPrice;
+//        this.size = size;
+//        this.customerId = customerId;
+//        this.shoeId = shoeId;
+//    }
+
+
+    public AddOrderItemRequest(int quantity, int totalPrice, int size, int customerId, int shoeId, Date date) {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.size = size;
         this.customerId = customerId;
         this.shoeId = shoeId;
+        this.date = date;
     }
 
     public int getQuantity() {

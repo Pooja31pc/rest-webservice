@@ -1,6 +1,9 @@
 package com.learn.shoeproject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class OrderItem {
@@ -12,13 +15,17 @@ public class OrderItem {
 	private int totalPrice;
 	private int size;
 
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date date;
+
 	@OneToOne(targetEntity= Customer.class)
 	private Customer customer;
 
 	@OneToOne(targetEntity= Shoe.class)
 	private Shoe shoe;
 
-	public OrderItem(int quantity, int totalPrice, int size, Customer customer1, Shoe boot) {
+	public OrderItem(int quantity, int totalPrice, int size, Date date, Customer customer1, Shoe boot) {
 	}
 
 	public Long getOrderItemId() {
@@ -39,6 +46,14 @@ public class OrderItem {
 
 	public int getTotalPrice() {
 		return totalPrice;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public void setTotalPrice(int totalPrice) {
@@ -69,11 +84,22 @@ public class OrderItem {
 		this.shoe = shoe;
 	}
 
-	public OrderItem(Long orderItemId, int quantity, int totalPrice, int size, Customer customer, Shoe shoe) {
+//	public OrderItem(Long orderItemId, int quantity, int totalPrice, int size, Customer customer, Shoe shoe) {
+//		this.orderItemId = orderItemId;
+//		this.quantity = quantity;
+//		this.totalPrice = totalPrice;
+//		this.size = size;
+//		this.customer = customer;
+//		this.shoe = shoe;
+//	}
+
+
+	public OrderItem(Long orderItemId, int quantity, int totalPrice, int size, Date date, Customer customer, Shoe shoe) {
 		this.orderItemId = orderItemId;
 		this.quantity = quantity;
 		this.totalPrice = totalPrice;
 		this.size = size;
+		this.date = date;
 		this.customer = customer;
 		this.shoe = shoe;
 	}

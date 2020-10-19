@@ -1,15 +1,20 @@
 package com.learn.shoeproject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/simplilearn")
+@RequestMapping("/admin")
 public class ProjectController {
 
     @Autowired
@@ -127,7 +132,7 @@ public class ProjectController {
             Optional<Shoe> shoe = shoerepo.findById(orderItemRequest.getShoeId());
             if (shoe.isPresent()){
                 Shoe boot =shoe.get();
-                OrderItem orderItem = new OrderItem(orderItemRequest.getQuantity(),orderItemRequest.getTotalPrice(),orderItemRequest.getSize(),customer1,boot);
+                OrderItem orderItem = new OrderItem(orderItemRequest.getQuantity(),orderItemRequest.getTotalPrice(),orderItemRequest.getSize(),orderItemRequest.getDate(),customer1,boot);
                 orderitemrepo.save(orderItem);
                 return "Success";
             }
@@ -143,6 +148,13 @@ public class ProjectController {
     {
 //        shoerepo.save(shoe);
         return shoe;
+    }
+
+    @GetMapping("getorderitem")
+    public OrderItem addOrderItem(@RequestParam("order_item_id") OrderItem orderItem)
+    {
+//        shoerepo.save(shoe);
+        return orderItem;
     }
 
     @GetMapping("getbrand")
@@ -165,12 +177,12 @@ public class ProjectController {
     }
 
 
-//    @PostMapping("addcustomer")
-//    public String addCustomerPost(@RequestBody Customer customer)
-//    {
-//        repo.save(customer);
-//        return "Success";
-//    }
+    @PostMapping("addcustomer")
+    public String addCustomerPost(@RequestBody Customer customer)
+    {
+        repo.save(customer);
+        return "Success";
+    }
 
 //    @PostMapping("addcustomer")
 //    public String postCustomer(@RequestBody AddCustomerRequest customerRequest){
@@ -207,6 +219,19 @@ public class ProjectController {
 //
 //}
 
+    @GetMapping("/getProjectReport")
+    public ProjectReport  getProjectReport(
+            @RequestParam("startdate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startdate,
+            @RequestParam("enddate") @DateTimeFormat(pattern="yyyy-MM-dd") Date enddate) {
+        List<OrderItem> orders = orderitemrepo.findAllWithDatetimeBefore(startdate,enddate);
+        List<CategorySales> categorySales = orderitemrepo.getCategorySales(startdate,enddate);
+        HashMap<String,Long> map =new HashMap<>();
+        for (CategorySales c: categorySales){
+            map.put(c.getCategory(),c.getTotalPrice());
+        }
+
+        return new ProjectReport(orders,map,startdate,enddate);
+    }
 
 }
 

@@ -1,8 +1,11 @@
 package com.learn.shoeproject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+//import java.util.Date;
 
 @XmlRootElement
 @Entity
@@ -85,7 +88,8 @@ public class Customer implements Serializable {
     private String email;
     private int phone;
 
-    public Customer(int customerId, String username, String password, String firstName, String lastName, String email, int phone) {
+
+        public Customer(int customerId, String username, String password, String firstName, String lastName, String email, int phone) {
         this.customerId = customerId;
         this.username = username;
         this.password = password;
