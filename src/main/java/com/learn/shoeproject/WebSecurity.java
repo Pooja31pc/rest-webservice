@@ -28,8 +28,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
        http.cors().and().authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/register").permitAll()
-               .antMatchers("/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/admin/register").permitAll()
+               .antMatchers("/admin/login").permitAll()
                .antMatchers("/swagger-ui.html").permitAll()
                .antMatchers("/swagger-resources/**").permitAll()
                .antMatchers("/v2/api-docs").permitAll()

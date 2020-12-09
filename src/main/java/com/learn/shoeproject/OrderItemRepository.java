@@ -20,5 +20,4 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Integer>
     List<CategorySales> getCategorySales( @Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
 
-
 }
