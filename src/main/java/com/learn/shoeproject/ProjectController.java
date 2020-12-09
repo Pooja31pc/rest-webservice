@@ -184,13 +184,7 @@ public class ProjectController {
         return "Success";
     }
 
-//    @PostMapping("addcustomer")
-//    public String postCustomer(@RequestBody AddCustomerRequest customerRequest){
-//        Customer customer = new Customer(customerRequest.getEmail(),customerRequest.getFirstname(),customerRequest.getLastname(),customerRequest.getPassword(),customerRequest.getPhone(),customerRequest.getUsername());
-//
-//        repo.save(customer);
-//        return "Success";
-//    }
+
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -206,18 +200,6 @@ public class ProjectController {
     @Autowired
     AdminRepository adminrepo;
 
-//    @PostMapping("login")
-//    public String auth(@RequestBody LoginAdmin login)
-//    {
-//        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
-//        return "Success";
-//    }
-
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
-//public void authenticate(String username, String password){
-//
-//}
 
 
     @GetMapping("/getProjectReport")
