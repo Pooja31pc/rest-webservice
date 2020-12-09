@@ -83,17 +83,7 @@ public class OrderItem {
 	public void setShoe(Shoe shoe) {
 		this.shoe = shoe;
 	}
-
-//	public OrderItem(Long orderItemId, int quantity, int totalPrice, int size, Customer customer, Shoe shoe) {
-//		this.orderItemId = orderItemId;
-//		this.quantity = quantity;
-//		this.totalPrice = totalPrice;
-//		this.size = size;
-//		this.customer = customer;
-//		this.shoe = shoe;
-//	}
-
-
+	
 	public OrderItem(Long orderItemId, int quantity, int totalPrice, int size, Date date, Customer customer, Shoe shoe) {
 		this.orderItemId = orderItemId;
 		this.quantity = quantity;
